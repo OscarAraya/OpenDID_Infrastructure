@@ -1,0 +1,11 @@
+variable "name"                     { type = string }
+variable "aurora_subnet_group_name" { type = string }
+variable "aurora_sg_id"             { type = string }
+variable "instance_class"           { type = string }
+variable "engine_version"           { type = string }
+variable "database_name"            { type = string }
+variable "master_username"          { type = string }
+variable "master_password"          { type = string }
+variable "backup_retention_period"  { type = string }
+variable "deletion_protection"      { type = string }
+variable "skip_final_snapshot"      { type = string }
