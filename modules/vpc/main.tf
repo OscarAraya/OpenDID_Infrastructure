@@ -7,9 +7,9 @@ resource "aws_vpc" "main" {
 }
 
 # Internet Gateway
-resource "aws_internet_gateway" "main" {
+resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main.id
-  tags   = { Name = "${var.name}-main" }
+  tags   = { Name = "${var.name}-igw" }
 }
 
 # Elastic IP for NAT Gateway
@@ -20,11 +20,11 @@ resource "aws_eip" "nat" {
 }
 
 # NAT Gateway
-resource "aws_nat_gateway" "main" {
+resource "aws_nat_gateway" "ngw" {
   allocation_id = aws_eip.nat.id
   subnet_id     = var.public_subnet_id
 
-  tags          = { Name = "${var.name}-main-nat-gw" }
+  tags          = { Name = "${var.name}-main-ngw" }
 
   depends_on    = [aws_internet_gateway.main]
 }
