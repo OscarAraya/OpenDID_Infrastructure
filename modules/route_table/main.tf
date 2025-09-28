@@ -1,10 +1,12 @@
 # Public Route table
 resource "aws_route_table" "public" {
   vpc_id = var.vpc_id
+  
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = var.igw_id
   }
+
   tags = { Name = "${var.name}-public-rt" }
 }
 
@@ -26,8 +28,21 @@ resource "aws_route_table" "private" {
   tags = { Name = "${var.name}-private-rt" }
 }
 
-# Associate Private Subnet with Route Table
+# Associate Private to the Public Route Table
 resource "aws_route_table_association" "private" {
-  subnet_id      = var.private_subnet_id
+  subnet_id      = var.private_data_subnet_id
+  route_table_id = aws_route_table.public.id # Use Public RT to connect through the NAT Gateway
+}
+
+# Private Database Route table
+resource "aws_route_table" "private-data" {
+  vpc_id = var.vpc_id
+
+  tags = { Name = "${var.name}-private-data-rt" }
+}
+
+# Associate Private Database Subnet with Route Table
+resource "aws_route_table_association" "private-data" {
+  subnet_id      = var.private_data_subnet_id
   route_table_id = aws_route_table.private.id
 }

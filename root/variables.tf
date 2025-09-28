@@ -7,7 +7,7 @@ variable "region" {
 variable "name" {
   description = "Name prefix for resources"
   type        = string
-  default     = "OpenDID"
+  default     = "opendid"
 }
 
 variable "bucket_name" {

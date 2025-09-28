@@ -19,16 +19,17 @@ module "subnets" {
 }
 
 module "rt" {
-  source                = "../modules/route_table"
-  name                  = var.name
+  source                  = "../modules/route_table"
+  name                    = var.name
   # VPC
-  vpc_id                = module.vpc.vpc_id
+  vpc_id                  = module.vpc.vpc_id
   # IGW & NAT
-  igw_id                = module.vpc.igw_id
-  nat_id                = module.vpc.nat_id
+  igw_id                  = module.vpc.igw_id
+  nat_id                  = module.vpc.nat_id
   # Subnet
-  public_subnet_id      = module.subnets.public_subnet_id
-  private_subnet_id     = module.subnets.private_subnet_id
+  public_subnet_id        = module.subnets.public_subnet_id
+  private_subnet_id       = module.subnets.private_subnet_id
+  private_data_subnet_id  = module.subnets.private_data_subnet_id
 }
 
 module "sg" {
@@ -84,7 +85,7 @@ module "database" {
   source                    = "../modules/database"
   name                      = var.name
   # Subnets
-  aurora_subnet_group_name  = module.subnets.aurora_subnet_group_name
+  private_data_subnet_group_name  = module.subnets.private_data_subnet_group_name
   # SGs
   aurora_sg_id              = module.sg.aurora_sg_id
   # Variables

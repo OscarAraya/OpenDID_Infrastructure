@@ -9,7 +9,7 @@ resource "aws_rds_cluster" "aurora_postgresql" {
   preferred_backup_window = "07:00-09:00"
   deletion_protection     = var.deletion_protection
   skip_final_snapshot     = var.skip_final_snapshot
-  db_subnet_group_name    = var.aurora_subnet_group_name
+  db_subnet_group_name    = var.private_data_subnet_group_name
   vpc_security_group_ids  = [var.aurora_sg_id]
 
   tags = {
