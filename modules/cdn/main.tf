@@ -91,7 +91,7 @@ resource "aws_cloudfront_distribution" "cdn" {
     custom_origin_config {
       http_port              = 80
       https_port             = 443
-      origin_protocol_policy = "http-only" # Change to https-only
+      origin_protocol_policy = "http-only" # Change to https-only for custom domain
       origin_ssl_protocols   = ["TLSv1.2"]
     }
   }

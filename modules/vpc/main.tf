@@ -24,7 +24,7 @@ resource "aws_nat_gateway" "ngw" {
   allocation_id = aws_eip.nat.id
   subnet_id     = var.public_subnet_id
 
-  tags          = { Name = "${var.name}-main-ngw" }
+  tags          = { Name = "${var.name}-ngw" }
 
-  depends_on    = [aws_internet_gateway.main]
+  depends_on    = [aws_internet_gateway.igw]
 }
