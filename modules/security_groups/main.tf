@@ -193,3 +193,29 @@ resource "aws_security_group" "aurora" {
     Name = "${var.name}-aurora-sg"
   }
 }
+
+## CDN
+# Security Group Rule to Allow CloudFront to Access ALB
+resource "aws_security_group_rule" "cloudfront_to_alb" {
+  type              = "ingress"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  security_group_id = aws_security_group.web_alb.id
+  
+  # Allow CloudFront IP ranges (recommended for better security)
+  cidr_blocks       = data.aws_ip_ranges.cloudfront.cidr_blocks
+  
+  description       = "Allow traffic from CloudFront to ALB"
+}
+
+# Security Group Rule - Only allow CloudFront via HTTPS
+# resource "aws_security_group_rule" "cloudfront_https_to_alb" {
+#   type              = "ingress"
+#   from_port         = 443
+#   to_port           = 443
+#   protocol          = "tcp"
+#   security_group_id = aws_security_group.web_alb.id
+#   cidr_blocks       = data.aws_ip_ranges.cloudfront.cidr_blocks
+#   description       = "Allow HTTPS from CloudFront to ALB"
+# }

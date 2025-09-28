@@ -15,6 +15,7 @@ module "subnets" {
   vpc_id                        = module.vpc.vpc_id
   public_subnet_cidr            = var.public_subnet_cidr
   private_subnet_cidr           = var.private_subnet_cidr
+  private_data_subnet_cidr      = var.private_data_subnet_cidr
 }
 
 module "rt" {
@@ -68,6 +69,15 @@ module "ec2" {
   key_name          = var.key_name
   instance_type     = var.instance_type
   instance_count    = var.instance_count
+}
+
+module "cdn" {
+  source              = "../modules/cdn"
+  name                = var.name
+  bucket_name         = var.bucket_name
+  aws_lb_web_id       = module.loadbalancer.aws_lb_web_id
+  aws_lb_web_name     = module.loadbalancer.aws_lb_web_id
+  aws_lb_web_dns_name = module.loadbalancer.aws_lb_web_dns_name
 }
 
 module "database" {

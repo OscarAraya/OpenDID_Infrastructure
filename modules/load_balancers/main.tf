@@ -44,6 +44,19 @@ resource "aws_lb_listener" "web" {
   }
 }
 
+# resource "aws_lb_listener" "web" {
+#   load_balancer_arn = aws_lb.web.arn
+#   port              = "443"
+#   protocol          = "HTTPS"
+#   ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-2021-06"
+#   certificate_arn   = var.acm_certificate_arn  # Use your ACM certificate
+
+#   default_action {
+#     type             = "forward"
+#     target_group_arn = aws_lb_target_group.web.arn
+#   }
+# }
+
 # Register Web instance with ALB Target Group
 resource "aws_lb_target_group_attachment" "web" {
   target_group_arn = aws_lb_target_group.web.arn

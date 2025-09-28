@@ -10,6 +10,12 @@ variable "name" {
   default     = "OpenDID"
 }
 
+variable "bucket_name" {
+  description = "Name prefix for resources"
+  type        = string
+  default     = "opendid-cloudfront-web"
+}
+
 variable "key_name" {
   description = "Key Name prefix for resources"
   type        = string
@@ -32,6 +38,12 @@ variable "private_subnet_cidr" {
   description = "Private Subnet CIDR"
   type        = string
   default     = "10.0.1.0/24"
+}
+
+variable "private_data_subnet_cidr" {
+  description = "Private Subnet CIDR"
+  type        = string
+  default     = "10.0.2.0/24"
 }
 
 variable "instance_type" {
