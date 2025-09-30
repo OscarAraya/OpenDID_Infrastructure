@@ -4,6 +4,12 @@ variable "region" {
   default     = "us-east-1"
 }
 
+variable "vpc_availability_zones" {
+  type = list(string)
+  description = "Availabiltiy Zones"
+  default = [ "us-east-1a", "us-east-1b" ]
+}
+
 variable "name" {
   description = "Name prefix for resources"
   type        = string
@@ -31,19 +37,19 @@ variable "vpc_cidr" {
 variable "public_subnet_cidr" {
   description = "Public Subnet CIDR"
   type        = string
-  default     = "10.0.100.0/24"
+  default     = "10.0.10.0/24"
 }
 
 variable "private_subnet_cidr" {
   description = "Private Subnet CIDR"
   type        = string
-  default     = "10.0.1.0/24"
+  default     = "10.0.11.0/24"
 }
 
 variable "private_data_subnet_cidr" {
-  description = "Private Subnet CIDR"
+  description = "Private Data Subnet CIDR"
   type        = string
-  default     = "10.0.2.0/24"
+  default     = "10.0.12.0/24"
 }
 
 variable "instance_type" {

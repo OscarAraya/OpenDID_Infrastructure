@@ -1,10 +1,9 @@
 variable "name"                 { type = string }
 #Subnets
-variable "public_subnet_id"     { type = string }
-variable "private_subnet_id"    { type = string }
+variable "public_subnet_ids"    { type = list(string) }
+variable "private_subnet_ids"   { type = list(string) }
 # Security Groups
 variable "bastion_sg_id"        { type = string }
-variable "web_alb_sg_id"        { type = string }
 variable "web_ec2_sg_id"        { type = string }
 variable "was_ec2_sg_id"        { type = string }
 # Variables

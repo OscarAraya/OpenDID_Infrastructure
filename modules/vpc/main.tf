@@ -16,15 +16,15 @@ resource "aws_internet_gateway" "igw" {
 resource "aws_eip" "nat" {
   domain  = "vpc"
 
+  depends_on    = [aws_internet_gateway.igw]
   tags    = { Name = "${var.name}-nat-eip" }
 }
 
 # NAT Gateway
 resource "aws_nat_gateway" "ngw" {
+  subnet_id = var.private_subnet_ids[0] # Se utiliza primer referencia
   allocation_id = aws_eip.nat.id
-  subnet_id     = var.public_subnet_id
-
-  tags          = { Name = "${var.name}-ngw" }
 
   depends_on    = [aws_internet_gateway.igw]
+  tags          = { Name = "${var.name}-ngw" }
 }
